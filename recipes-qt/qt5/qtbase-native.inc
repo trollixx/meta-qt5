@@ -2,7 +2,6 @@ DESCRIPTION = "Native version of Qt/[X11|Mac|Embedded]"
 DEPENDS = "zlib-native dbus-native"
 SECTION = "libs"
 HOMEPAGE = "http://qt-project.org"
-PROVIDES = "qt5-tools-native"
 
 INC_PR = "r1"
 

@@ -3,7 +3,7 @@
 #
 inherit qmake5_base
 
-QT5TOOLSDEPENDS ?= "qt5-native "
+QT5TOOLSDEPENDS ?= "qtbase-native "
 DEPENDS_prepend = "${QT5TOOLSDEPENDS}"
 
 export OE_QMAKE_LINK = "${CXX}"
