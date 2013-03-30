@@ -21,6 +21,7 @@ QMAKE_LIBS_X11SM      = ${OE_QMAKE_LIBS_X11SM}
 QMAKE_MOC             = ${OE_QMAKE_MOC}
 QMAKE_UIC             = ${OE_QMAKE_UIC}
 QMAKE_RCC             = ${OE_QMAKE_RCC}
+QMAKE_SYNCQT          = ${OE_QMAKE_SYNCQT}
 #QMAKE_AR              = ${OE_QMAKE_AR} cqs
 QMAKE_AR              = ${OE_QMAKE_AR}
 QMAKE_STRIP           = ${OE_QMAKE_STRIP}
@@ -35,6 +36,7 @@ QMAKE_CXX             = ${OE_QMAKE_CXX}
 QMAKE_LINK            = ${OE_QMAKE_LINK}
 QMAKE_LINK_SHLIB      = ${OE_QMAKE_LINK}
 QMAKE_CONF_COMPILER   = ${OE_QMAKE_CONF_COMPILER}
+QMAKE_QT_CONFIG       = ${OE_QMAKE_QT_CONFIG}
 
 load(qt_config)
 EOF
