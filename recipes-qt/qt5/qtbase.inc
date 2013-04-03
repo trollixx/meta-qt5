@@ -32,7 +32,6 @@ ARM_INSTRUCTION_SET = "arm"
 inherit qmake5
 
 do_generate_qt_config_file() {
-    :
     cat > ${WORKDIR}/qt.conf <<EOF
 [Paths]
 Binaries = ${bindir}
@@ -42,7 +41,7 @@ Headers = ${includedir}/${QT_DIR_NAME}
 Data = ${datadir}/${QT_DIR_NAME}
 ArchData = ${libdir}/${QT_DIR_NAME}
 Documentation = ${docdir}/${QT_DIR_NAME}
-HostData = ${S}
+HostData = ${STAGING_DATADIR_NATIVE}
 HostSpecPath = ${QMAKE_MKSPEC_PATH_NATIVE}
 HostBinaries = ${STAGING_BINDIR_NATIVE}/${QT_DIR_NAME}
 EOF
@@ -62,7 +61,7 @@ do_configure_append() {
     cp -va ${WORKDIR}/qmake.conf ${OE_XQMAKESPEC}/
 
     if [ ! -e bin/qmake ]; then
-        ln -sf ${OE_QMAKE_QMKE} bin/qmake
+        ln -sf ${OE_QMAKE_QMAKE} bin/qmake
     fi
     if [ ! -e bin/rcc ]; then
         ln -sf ${OE_QMAKE_RCC} bin/rcc
@@ -88,7 +87,7 @@ do_configure_append() {
         -importdir ${libdir}/${QT_DIR_NAME}/imports \
         -translationdir ${datadir}/${QT_DIR_NAME}/translations \
         -examplesdir ${bindir}/${QT_DIR_NAME}/examples \
-        -hostdatadir ${S} \
+        -hostdatadir ${STAGING_DATADIR_NATIVE} \
         -hostbindir ${STAGING_BINDIR_NATIVE}/${QT_DIR_NAME} \
         -platform ${OE_QMAKE_PLATFORM} \
         ${QT_CONFIG_FLAGS}
