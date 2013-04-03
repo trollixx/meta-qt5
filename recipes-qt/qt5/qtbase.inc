@@ -61,6 +61,19 @@ do_configure_append() {
     # exported from qmake5_base.bbclass to define toolchain and flags
     cp -va ${WORKDIR}/qmake.conf ${OE_XQMAKESPEC}/
 
+    if [ ! -e bin/qmake ]; then
+        ln -sf ${OE_QMAKE_QMKE} bin/qmake
+    fi
+    if [ ! -e bin/rcc ]; then
+        ln -sf ${OE_QMAKE_RCC} bin/rcc
+    fi
+    if [ ! -e bin/moc ]; then
+        ln -sf ${OE_QMAKE_MOC} bin/moc
+    fi
+    if [ ! -e bin/uic ]; then
+        ln -sf ${OE_QMAKE_UIC} bin/uic
+    fi
+
     ./configure -v \
         -dont-process \
         -opensource -confirm-license \
