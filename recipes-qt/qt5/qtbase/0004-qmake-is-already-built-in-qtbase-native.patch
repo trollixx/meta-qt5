@@ -22,7 +22,7 @@ index 50f1ef2..8710c28 100755
  # build qmake
 -if true; then ###[ '!' -f "$outpath/bin/qmake" ];
 +if false; then ###[ '!' -f "$outpath/bin/qmake" ];
-     echo "Creating qmake. Please wait..."
+     echo "Creating qmake..."
  
      mkdir -p "$outpath/qmake" || exit
 -- 
