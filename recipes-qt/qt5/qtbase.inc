@@ -50,7 +50,6 @@ EOF
 
 # qtbase is exception, we need to use mkspecs from ${S}
 QMAKE_MKSPEC_PATH = "${S}/mkspecs"
-OE_XQMAKESPEC="${S}/mkspecs/${TARGET_OS}-oe-g++"
 
 do_configure_append() {
     if [ ! -e ${OE_XQMAKESPEC} ]; then
@@ -78,8 +77,7 @@ do_configure_append() {
         -examplesdir ${bindir}/${QT_DIR_NAME}/examples \
         -hostdatadir ${S} \
         -hostbindir ${STAGING_BINDIR_NATIVE}/${QT_DIR_NAME} \
-        -platform ${OE_QMAKESPEC} \
-        -xplatform ${OE_XQMAKESPEC} \
+        -platform ${OE_QMAKE_PLATFORM} \
         ${QT_CONFIG_FLAGS}
 
     ${OE_QMAKE_QMAKE} -r -d
