@@ -15,7 +15,6 @@ QT_DIR_NAME ?= "qt5"
 
 SRC_URI += " \
   file://0001-qlibraryinfo-allow-to-set-qt.conf-from-the-outside-u.patch \
-  file://0001-Always-build-uic.patch \
   file://qmake.conf \
 "
 
