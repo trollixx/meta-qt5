@@ -1,15 +1,16 @@
-From a2a01e1fd975e8e616b580423c3bf30db9c11b6d Mon Sep 17 00:00:00 2001
+From 631c91148e72d462ccdace5837ebc880bac4ed95 Mon Sep 17 00:00:00 2001
 From: Paul Eggleton <paul.eggleton@linux.intel.com>
 Date: Mon, 29 Oct 2012 20:26:36 -0700
-Subject: [PATCH] Allow building a separate qmake for the target
+Subject: [PATCH 3/4] Allow building a separate qmake for the target
 
 Upstream-Status: Inappropriate [config]
 
 Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
 Signed-off-by: Mikko Levonmaa <mikko.levonmaa@gmail.com>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- qmake/qmake.pro |    1 +
- 1 files changed, 1 insertions(+), 0 deletions(-)
+ qmake/qmake.pro | 1 +
+ 1 file changed, 1 insertion(+)
 
 diff --git a/qmake/qmake.pro b/qmake/qmake.pro
 index 0d92ac2..07fa80e 100644
@@ -24,5 +25,5 @@ index 0d92ac2..07fa80e 100644
  OBJECTS_DIR = .
  MOC_DIR = .
 -- 
-1.7.4.1
+1.8.1.5
 
