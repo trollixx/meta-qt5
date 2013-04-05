@@ -8,7 +8,7 @@ SRC_URI += " \
   file://qmake.conf \
 "
 
-DEPENDS += "qtbase-native virtual/libgl freetype jpeg libpng zlib openssl glib-2.0 ${ICU}"
+DEPENDS += "qtbase-native virtual/libgl freetype jpeg libpng zlib openssl glib-2.0 ${ICU} udev"
 
 # to provide xcb/xcb_icccm.h, xcb/xcb_image.h, xcb/xcb_keysyms.h and dbus/dbus.h
 XCB_DEPENDS += "xcb-util-wm xcb-util-image xcb-util-keysyms dbus"
@@ -41,7 +41,8 @@ Headers = ${includedir}/${QT_DIR_NAME}
 Data = ${datadir}/${QT_DIR_NAME}
 ArchData = ${libdir}/${QT_DIR_NAME}
 Documentation = ${docdir}/${QT_DIR_NAME}
-HostData = ${STAGING_DATADIR_NATIVE}
+HostData = ${S}
+TargetSpecPath = ${S}
 HostSpecPath = ${QMAKE_MKSPEC_PATH_NATIVE}
 HostBinaries = ${STAGING_BINDIR_NATIVE}/${QT_DIR_NAME}
 EOF
@@ -76,8 +77,9 @@ do_configure_append() {
     ./configure -v \
         -dont-process \
         -opensource -confirm-license \
+	-sysroot ${STAGING_DIR_TARGET} \
         -prefix ${prefix} \
-        -bindir ${bindir} \
+        -bindir ${bindir}/blah \
         -libdir ${libdir} \
         -datadir ${S} \
         -sysconfdir ${sysconfdir}/${QT_DIR_NAME} \
@@ -87,9 +89,9 @@ do_configure_append() {
         -importdir ${libdir}/${QT_DIR_NAME}/imports \
         -translationdir ${datadir}/${QT_DIR_NAME}/translations \
         -examplesdir ${bindir}/${QT_DIR_NAME}/examples \
-        -hostdatadir ${STAGING_DATADIR_NATIVE} \
         -hostbindir ${STAGING_BINDIR_NATIVE}/${QT_DIR_NAME} \
-        -platform ${OE_QMAKE_PLATFORM} \
+        -platform ${OE_QMAKESPEC} \
+        -xplatform ${OE_XQMAKESPEC} \
         ${QT_CONFIG_FLAGS}
 
     ${OE_QMAKE_QMAKE} -r -d
