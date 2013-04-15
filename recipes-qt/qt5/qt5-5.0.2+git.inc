@@ -10,6 +10,8 @@ S = "${WORKDIR}/git"
 
 PV = "5.0.2+git${SRCPV}"
 
+FILESEXTRAPATHS =. "${FILE_DIRNAME}/${BPN}-git:
+
 DEFAULT_PREFERENCE = "-1"
 
 LICENSE = "GFDL-1.3 & LGPLv2.1 | GPLv3"
