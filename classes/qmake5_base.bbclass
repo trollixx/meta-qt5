@@ -1,8 +1,9 @@
-QMAKE_MKSPEC_PATH_NATIVE = "${STAGING_LIBDIR_NATIVE}/${QT_DIR_NAME}/mkspecs"
+QMAKE_MKSPEC_PATH_NATIVE = "${STAGING_LIBDIR_NATIVE}/${QT_DIR_NAME}"
 # hardcode linux, because that's what 0001-Add-linux-oe-g-platform.patch adds
 OE_QMAKE_PLATFORM_NATIVE = "linux-oe-g++"
 
-QMAKE_MKSPEC_PATH = "${STAGING_DATADIR}/${QT_DIR_NAME}/mkspecs"
+QMAKE_MKSPEC_PATH = "${STAGING_DATADIR}/${QT_DIR_NAME}"
+QMAKE_MKSPEC_PATH_class-native = "${QMAKE_MKSPEC_PATH_NATIVE}"
 OE_QMAKE_PLATFORM = "linux-oe-g++"
 
 EXTRA_OEMAKE = " MAKEFLAGS='${PARALLEL_MAKE}'"
@@ -14,8 +15,8 @@ EXTRA_ENV = 'QMAKE="${OE_QMAKE_QMAKE} -d -after \
              STRIP="${OE_QMAKE_STRIP}" \
              MAKE="make -e ${PARALLEL_MAKE}"'
 
-export OE_QMAKESPEC = "${QMAKE_MKSPEC_PATH_NATIVE}/${OE_QMAKE_PLATFORM_NATIVE}"
-export OE_XQMAKESPEC = "${QMAKE_MKSPEC_PATH}/${OE_QMAKE_PLATFORM}"
+export OE_QMAKESPEC = "${QMAKE_MKSPEC_PATH_NATIVE}/mkspecs/${OE_QMAKE_PLATFORM_NATIVE}"
+export OE_XQMAKESPEC = "${QMAKE_MKSPEC_PATH}/mkspecs/${OE_QMAKE_PLATFORM}"
 export OE_QMAKE_QMAKE = "${STAGING_BINDIR_NATIVE}/${QT_DIR_NAME}/qmake"
 export OE_QMAKE_MOC = "${STAGING_BINDIR_NATIVE}/${QT_DIR_NAME}/moc"
 export OE_QMAKE_RCC = "${STAGING_BINDIR_NATIVE}/${QT_DIR_NAME}/rcc"
@@ -50,9 +51,10 @@ EOF
 do_generate_qt_config_file_append_class-target() {
     cat >> ${WORKDIR}/qt.conf <<EOF
 ExternalHostBinaries = ${STAGING_BINDIR_NATIVE}/${QT_DIR_NAME}
-HostData = ${STAGING_LIBDIR_NATIVE}/${QT_DIR_NAME}
+HostData = ${QMAKE_MKSPEC_PATH}
+#HostData = ${STAGING_LIBDIR_NATIVE}/${QT_DIR_NAME}
 # This doesn't work in 5.0.1
-HostSpec = ${QMAKE_MKSPEC_PATH_NATIVE}
+#HostSpec = ${QMAKE_MKSPEC_PATH_NATIVE}
 EOF
 }
 

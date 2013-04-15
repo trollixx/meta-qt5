@@ -31,25 +31,27 @@ ARM_INSTRUCTION_SET = "arm"
 
 inherit qmake5
 
-do_generate_qt_config_file() {
-    cat > ${WORKDIR}/qt.conf <<EOF
-[Paths]
-Binaries = ${bindir}
-Libraries = ${libdir}
-Prefix = ${prefix}
-Headers = ${includedir}/${QT_DIR_NAME}
-Data = ${datadir}/${QT_DIR_NAME}
-ArchData = ${libdir}/${QT_DIR_NAME}
-Documentation = ${docdir}/${QT_DIR_NAME}
-HostSpec = ${QMAKE_MKSPEC_PATH_NATIVE}
-#HostData = ${S}
-TargetSpec = ${S}
-ExternalHostBinaries = ${STAGING_BINDIR_NATIVE}/${QT_DIR_NAME}
-EOF
-}
+
+#do_generate_qt_config_file() {
+#    cat > ${WORKDIR}/qt.conf <<EOF
+#[Paths]
+#Binaries = ${bindir}
+#Libraries = ${libdir}
+#Prefix = ${prefix}
+#Headers = ${includedir}/${QT_DIR_NAME}
+#Data = ${datadir}/${QT_DIR_NAME}
+#ArchData = ${libdir}/${QT_DIR_NAME}
+#Documentation = ${docdir}/${QT_DIR_NAME}
+#HostSpec = ${QMAKE_MKSPEC_PATH_NATIVE}
+##HostData = ${S}
+#TargetSpec = ${S}
+#ExternalHostBinaries = ${STAGING_BINDIR_NATIVE}/${QT_DIR_NAME}
+#EOF
+#}
 
 # qtbase is exception, we need to use mkspecs from ${S}
 # QMAKE_MKSPEC_PATH = "${S}/mkspecs"
+QMAKE_MKSPEC_PATH = "${B}"
 
 do_configure_append() {
 #    if [ ! -e ${OE_XQMAKESPEC} ]; then
