@@ -35,25 +35,28 @@ QT_EXAMPLES ?= "-nomake examples"
 QT_DEMOS ?= "-nomake demos"
 
 QT_CONFIG_FLAGS += " \
-  -release \
-  -reduce-relocations \
-  -shared \
-  -silent \
-  -glib \
-  -no-pch \
-  -no-rpath \
-  -pkg-config \
-  ${QT_SYSTEM_LIBS} \
-  ${QT_NIS} \
-  ${QT_CUPS} \
-  ${QT_SQL_DRIVER_FLAGS} \
-  ${QT_DISTRO_FLAGS} \
-  ${QT_MODULE_FLAGS} \
-  ${QT_GLFLAGS} \
-  ${QT_TESTS} \
-  ${QT_EXAMPLES} \
-  ${QT_DEMOS} \
+    -release \
+    -reduce-relocations \
+    -shared \
+    -silent \
+    -glib \
+    -no-pch \
+    -no-rpath \
+    -pkg-config \
+    ${QT_SYSTEM_LIBS} \
+    ${QT_NIS} \
+    ${QT_CUPS} \
+    ${QT_SQL_DRIVER_FLAGS} \
+    ${QT_DISTRO_FLAGS} \
+    ${QT_MODULE_FLAGS} \
+    ${QT_GLFLAGS} \
+    ${QT_TESTS} \
+    ${QT_EXAMPLES} \
+    ${QT_DEMOS} \
 "
+
+SEPB = "${WORKDIR}/build"
+B = "${SEPB}"
 
 do_configure() {
     set_arch
@@ -61,10 +64,15 @@ do_configure() {
 
     # Avoid problems with the linkers, since we want the linker to be g++
     unset LD
+
+    # Similar logic is in autotools.bbclass
+    if [ -d ${B} -a "${S}" != "${B}" ] ; then
+        # Existing separate build directory, exists, remove
+        rm -rf "${B}/*"
+    fi
 }
 
 do_compile() {
-
     unset CFLAGS CXXFLAGS AR
 
     oe_runmake ${EXTRA_ENV}
@@ -80,8 +88,8 @@ FILES_${PN}-plugins = "${libdir}/${QT_DIR_NAME}/plugins/*/*${SOLIBSDEV}"
 FILES_${PN}-plugins-dbg = "${libdir}/${QT_DIR_NAME}/plugins/*/.debug/*"
 
 FILES_${PN}-dev += " \
-        ${libdir}/cmake/* \
-        ${libdir}/*.prl \
-        ${includedir}/qt5/* \
-        ${datadir}/qt5/* \
+    ${libdir}/cmake/* \
+    ${libdir}/*.prl \
+    ${includedir}/qt5/* \
+    ${datadir}/qt5/* \
 "

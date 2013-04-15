@@ -1,11 +1,11 @@
 require qt5.inc
 
 SRC_URI += " \
-  file://0001-qlibraryinfo-allow-to-set-qt.conf-from-the-outside-u.patch \
-  file://0002-qmake-is-already-built-in-qt5-tools-native.patch \
-  file://0003-Allow-building-a-separate-qmake-for-the-target.patch \
-  file://0004-configure-eval-QMAKE_CXX.patch \
-  file://qmake.conf \
+    file://0001-Add-linux-oe-g-platform.patch \
+    file://0002-qlibraryinfo-allow-to-set-qt.conf-from-the-outside-u.patch \
+    file://0003-Add-external-hostbindir-option.patch \
+    file://0004-qmake-is-already-built-in-qtbase-native.patch \
+    file://0005-Allow-building-a-separate-qmake-for-the-target.patch \
 "
 
 DEPENDS += "qtbase-native virtual/libgl freetype jpeg libpng zlib openssl glib-2.0 ${ICU} udev"
@@ -41,47 +41,39 @@ Headers = ${includedir}/${QT_DIR_NAME}
 Data = ${datadir}/${QT_DIR_NAME}
 ArchData = ${libdir}/${QT_DIR_NAME}
 Documentation = ${docdir}/${QT_DIR_NAME}
-HostData = ${S}
-TargetSpecPath = ${S}
-HostSpecPath = ${QMAKE_MKSPEC_PATH_NATIVE}
-HostBinaries = ${STAGING_BINDIR_NATIVE}/${QT_DIR_NAME}
+HostSpec = ${QMAKE_MKSPEC_PATH_NATIVE}
+#HostData = ${S}
+TargetSpec = ${S}
+ExternalHostBinaries = ${STAGING_BINDIR_NATIVE}/${QT_DIR_NAME}
 EOF
 }
 
 # qtbase is exception, we need to use mkspecs from ${S}
-QMAKE_MKSPEC_PATH = "${S}/mkspecs"
+# QMAKE_MKSPEC_PATH = "${S}/mkspecs"
 
 do_configure_append() {
-    if [ ! -e ${OE_XQMAKESPEC} ]; then
-        mkdir -p ${OE_XQMAKESPEC}
-    fi
-    # use default qplatformdefs.h from linux-g++
-    cp -va ${QMAKE_MKSPEC_PATH}/linux-g++/qplatformdefs.h ${OE_XQMAKESPEC}/
-    # use modified qmake.conf which is using OE_QMAKE_* shell variables
-    # exported from qmake5_base.bbclass to define toolchain and flags
-    cp -va ${WORKDIR}/qmake.conf ${OE_XQMAKESPEC}/
+#    if [ ! -e ${OE_XQMAKESPEC} ]; then
+#        mkdir -p ${OE_XQMAKESPEC}
+#    fi
+#    # use default qplatformdefs.h from linux-g++
+#    cp -va ${QMAKE_MKSPEC_PATH}/linux-g++/qplatformdefs.h ${OE_XQMAKESPEC}/
+#    # use modified qmake.conf which is using OE_QMAKE_* shell variables
+#    # exported from qmake5_base.bbclass to define toolchain and flags
+#    cp -va ${WORKDIR}/qmake.conf ${OE_XQMAKESPEC}/
 
-    if [ ! -e bin/qmake ]; then
-        ln -sf ${OE_QMAKE_QMAKE} bin/qmake
-    fi
-    if [ ! -e bin/rcc ]; then
-        ln -sf ${OE_QMAKE_RCC} bin/rcc
-    fi
-    if [ ! -e bin/moc ]; then
-        ln -sf ${OE_QMAKE_MOC} bin/moc
-    fi
-    if [ ! -e bin/uic ]; then
-        ln -sf ${OE_QMAKE_UIC} bin/uic
+    if [ ! -e ${B}/bin/qmake ]; then
+        mkdir ${B}/bin
+        ln -sf ${OE_QMAKE_QMAKE} ${B}/bin/qmake
     fi
 
-    ./configure -v \
-        -dont-process \
+    ${S}/configure -v \
         -opensource -confirm-license \
-	-sysroot ${STAGING_DIR_TARGET} \
+        -sysroot ${STAGING_DIR_TARGET} \
+	-no-gcc-sysroot \
         -prefix ${prefix} \
-        -bindir ${bindir}/blah \
-        -libdir ${libdir} \
-        -datadir ${S} \
+        -bindir ${bindir}/${QT_DIR_NAME} \
+        -libdir ${libdir}/${QT_DIR_NAME} \
+        -datadir ${datadir}/${QT_DIR_NAME} \
         -sysconfdir ${sysconfdir}/${QT_DIR_NAME} \
         -docdir ${docdir}/${QT_DIR_NAME} \
         -headerdir ${includedir}/${QT_DIR_NAME} \
@@ -89,12 +81,12 @@ do_configure_append() {
         -importdir ${libdir}/${QT_DIR_NAME}/imports \
         -translationdir ${datadir}/${QT_DIR_NAME}/translations \
         -examplesdir ${bindir}/${QT_DIR_NAME}/examples \
-        -hostbindir ${STAGING_BINDIR_NATIVE}/${QT_DIR_NAME} \
+        -external-hostbindir ${STAGING_BINDIR_NATIVE}/${QT_DIR_NAME} \
         -platform ${OE_QMAKESPEC} \
-        -xplatform ${OE_XQMAKESPEC} \
+        -xplatform linux-oe-g++ \
         ${QT_CONFIG_FLAGS}
 
-    ${OE_QMAKE_QMAKE} -r -d
+    ${OE_QMAKE_QMAKE} -r -d ${S}
 }
 
 do_compile_append() {
