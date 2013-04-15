@@ -9,7 +9,6 @@ inherit native qmake5_base
 
 QT_MODULE = "qtbase"
 
-FILESEXTRAPATHS =. "${FILE_DIRNAME}/${PN}:${FILE_DIRNAME}/qtbase:"
 SSTATE_SCAN_FILES += "*.pri *.prl"
 QT_DIR_NAME ?= "qt5"
 

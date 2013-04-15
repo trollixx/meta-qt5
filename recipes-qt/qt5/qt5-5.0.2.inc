@@ -2,7 +2,9 @@
 # Copyright (C) 2013 Martin Jansa <martin.jansa@gmail.com>
 
 QT_VERSION ?= "5.0.2"
-QT_VERSION_DIR ?= "5.0.2-rc1"
+
+# it's different for RC versions
+QT_VERSION_DIR ?= "$QT_VERSION}"
 
 SRC_URI += " \
   http://releases.qt-project.org/qt5/${QT_VERSION_DIR}/submodules_tar/${QT_MODULE}-opensource-src-${QT_VERSION}.tar.xz \
