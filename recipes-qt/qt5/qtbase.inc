@@ -6,6 +6,7 @@ SRC_URI += " \
     file://0003-Add-external-hostbindir-option.patch \
     file://0004-qmake-is-already-built-in-qtbase-native.patch \
     file://0005-Allow-building-a-separate-qmake-for-the-target.patch \
+    file://0006-qt_functions-temporary-remove-isEmpty-check.patch \
 "
 
 DEPENDS += "qtbase-native virtual/libgl freetype jpeg libpng zlib openssl glib-2.0 ${ICU} udev"

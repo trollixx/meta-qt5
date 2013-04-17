@@ -1,0 +1,36 @@
+From 4fbac40ae2e82329d1c9f00b44052ee52d6f1500 Mon Sep 17 00:00:00 2001
+From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Wed, 17 Apr 2013 18:06:25 +0200
+Subject: [PATCH 6/6] qt_functions: temporary remove isEmpty check
+
+* now we assume that every build will provide QT_EXTERNAL_HOST_BINS value
+
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ mkspecs/features/qt_functions.prf | 10 +++++++---
+ 1 file changed, 7 insertions(+), 3 deletions(-)
+
+diff --git a/mkspecs/features/qt_functions.prf b/mkspecs/features/qt_functions.prf
+index e249960..35198ef 100644
+--- a/mkspecs/features/qt_functions.prf
++++ b/mkspecs/features/qt_functions.prf
+@@ -195,9 +195,13 @@ defineTest(qtPrepareTool) {
+     $$1 = $$eval(QT_TOOL.$${2}.command)
+     isEmpty($$1) {
+         $$1 = $$[QT_EXTERNAL_HOST_BINS]/$$2
+-        isEmpty($$[QT_EXTERNAL_HOST_BINS]) {
+-            $$1 = $$[QT_HOST_BINS/get]/$$2
+-        }
++        # for some reason isEmpty does not work here, FIXME before submitting upstream
++        # DEBUG 1: mkspecs/features/qt_functions.prf:198: calling built-in isEmpty(/OE/oe-core/tmp-eglibc/sysroots/x86_64-linux/usr/bin/qt5)
++        # DEBUG 1: mkspecs/features/qt_functions.prf:198: test function returned true
++        # DEBUG 1: mkspecs/features/qt_functions.prf:198: taking 'then' branch
++        # isEmpty($$[QT_EXTERNAL_HOST_BINS]) {
++        #     $$1 = $$[QT_HOST_BINS/get]/$$2
++        # }
+         contains(QMAKE_HOST.os, Windows):!contains($$1, .*\\.(exe|bat)$) {
+             exists($$eval($$1).bat) {
+                 $$1 = $$eval($$1).bat
+-- 
+1.8.1.5
+
