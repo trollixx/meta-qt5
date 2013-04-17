@@ -1,5 +1,0 @@
-PREFERRED_VERSION_qtbase-native = "5.0.2+git%"
-PREFERRED_VERSION_qtbase = "5.0.2+git%"
-PREFERRED_VERSION_qtdeclarative = "5.0.2+git%"
-PREFERRED_VERSION_qtjsbackend = "5.0.2+git%"
-PREFERRED_VERSION_qtjsbackend-native = "5.0.2+git%"

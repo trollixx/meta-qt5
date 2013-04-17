@@ -1,0 +1,8 @@
+QT5_VERSION ?= "5.0.1"
+#QT5_VERSION ?= "5.0.2"
+#QT5_VERSION ?= "5.0.2+git$"
+PREFERRED_VERSION_qtbase-native = "${QT5_VERSION}"
+PREFERRED_VERSION_qtbase = "${QT5_VERSION}"
+PREFERRED_VERSION_qtdeclarative = "${QT5_VERSION}"
+PREFERRED_VERSION_qtjsbackend = "${QT5_VERSION}"
+PREFERRED_VERSION_qtjsbackend-native = "${QT5_VERSION}"
