@@ -1,7 +1,7 @@
-From e0631034b39113aa77193ea125f985d97c151452 Mon Sep 17 00:00:00 2001
+From f5d5c9778031fbb807753c67133ddda35f9a0e30 Mon Sep 17 00:00:00 2001
 From: Martin Jansa <Martin.Jansa@gmail.com>
 Date: Mon, 15 Apr 2013 04:29:32 +0200
-Subject: [PATCH 1/5] Add linux-oe-g++ platform
+Subject: [PATCH 1/6] Add linux-oe-g++ platform
 
 * This qmake.conf unlike other platforms reads most variables from
   shell environment, because it's easier for qt recipes to export
@@ -20,6 +20,14 @@ Subject: [PATCH 1/5] Add linux-oe-g++ platform
 * Add setBootstrapEvalVariable to bootstrap qmake with our environment
   too, this allows us to use -platform linux-oe-g++ also for native
   recipe
+
+* disable gdb_dwarf_index
+  * qmake is trying to call native gdb and we don't depend on gdb-native
+    (or even provide gdb-native)
+  * fixes errors like this:
+    /bin/sh: gdb: command not found
+    /bin/sh: line 0: test: -gt: unary operator expected
+    which are not fatal, but still misleading in do_configure output
 
 Upstream-Status: Pending
 

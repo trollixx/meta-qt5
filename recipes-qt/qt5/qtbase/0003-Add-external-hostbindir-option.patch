@@ -1,7 +1,7 @@
-From a729756fa95398589809ce2a5a8b18021ed7c531 Mon Sep 17 00:00:00 2001
+From 72d8aaf00e3d722b56b66bd5fa1f1f3d3e8a8552 Mon Sep 17 00:00:00 2001
 From: Martin Jansa <Martin.Jansa@gmail.com>
 Date: Sat, 6 Apr 2013 13:15:07 +0200
-Subject: [PATCH 3/5] Add -external-hostbindir option
+Subject: [PATCH 3/6] Add -external-hostbindir option
 
 * when cross-compiling it's sometimes useful to use existing tools from machine
   (or in OpenEmbedded built with separate native recipe) when building for target
