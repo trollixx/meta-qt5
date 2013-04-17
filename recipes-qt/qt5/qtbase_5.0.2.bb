@@ -3,5 +3,5 @@ require qt5-${PV}.inc
 
 PR = "${INC_PR}.0"
 
-SRC_URI[md5sum] = "c1800c0680fe6185cdc29ea9f5dfeb4b"
-SRC_URI[sha256sum] = "1f64f5fbe186be725e9570548c45447121d1658cd9f6c7ba8f30f30f83944685"
+SRC_URI[md5sum] = "a4fec8ed03867c4ee4fe5a46001a11f0"
+SRC_URI[sha256sum] = "31851ee2f844c100554506a9a446d4b6abb5270bca799c2a683e5f937456a9c8"
