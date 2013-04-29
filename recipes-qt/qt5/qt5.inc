@@ -82,20 +82,10 @@ do_compile() {
 }
 
 do_install() {
-    oe_runmake install INSTALL_ROOT=${D}
+    # Fix install paths for all
+    find -name "Makefile*" | xargs sed -i "s,(INSTALL_ROOT)${STAGING_DIR_TARGET},(INSTALL_ROOT),g"
 
-    # everything except HostData and HostBinaries is prefixed with sysroot value,
-    # but we cannot remove sysroot override, because that's useful for pkg-config etc
-    if [ -d ${D}${STAGING_DIR_TARGET} ] ; then
-        cp -ra ${D}${STAGING_DIR_TARGET}/* ${D}
-        rm -rf ${D}${STAGING_DIR_TARGET}
-        # remove empty dirs
-        TMP=`dirname ${D}/${STAGING_DIR_TARGET}`
-        while test ${TMP} != ${D}; do
-            rmdir ${TMP}
-            TMP=`dirname ${TMP}`;
-        done
-    fi
+    oe_runmake install INSTALL_ROOT=${D}
 }
 
 PACKAGES =. "${PN}-tools-dbg ${PN}-plugins-dbg ${PN}-tools ${PN}-plugins ${PN}-mkspecs "
