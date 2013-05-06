@@ -1,4 +1,4 @@
-From 5c70644070803b665f64c2d3212b55a4a3270765 Mon Sep 17 00:00:00 2001
+From 94a2963dfd212e2d3b2cf5d7ce4bcd785f2823e2 Mon Sep 17 00:00:00 2001
 From: Daniel Stone <daniel@fooishbar.org>
 Date: Sun, 10 Mar 2013 11:29:38 -0700
 Subject: [PATCH 4/4] EGL: Specify vec2d precision qualifier in fragment shader
@@ -14,10 +14,10 @@ Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/src/plugins/platforms/qwayland-egl/qwaylandglcontext.cpp b/src/plugins/platforms/qwayland-egl/qwaylandglcontext.cpp
-index 4d8017d..a0ac6d9 100644
+index 3dccb7b..e28f0d1 100644
 --- a/src/plugins/platforms/qwayland-egl/qwaylandglcontext.cpp
 +++ b/src/plugins/platforms/qwayland-egl/qwaylandglcontext.cpp
-@@ -124,7 +124,7 @@ void QWaylandGLContext::swapBuffers(QPlatformSurface *surface)
+@@ -143,7 +143,7 @@ void QWaylandGLContext::swapBuffers(QPlatformSurface *surface)
                                                                              gl_Position = position;\n\
                                                                              outTexCoords = texCoords.xy;\n\
                                                                          }");

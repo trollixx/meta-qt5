@@ -1,4 +1,4 @@
-From ae72fc41609c15293b1027ca3f2c4d712e4ae478 Mon Sep 17 00:00:00 2001
+From 883a03f2045ed3745cc78d2853b6b60363879f4e Mon Sep 17 00:00:00 2001
 From: Mikko Levonmaa <mikko.levonmaa@palm.com>
 Date: Fri, 1 Mar 2013 13:00:53 -0800
 Subject: [PATCH 2/4] Temporarily patching this out as Qt5.0.0 does not have

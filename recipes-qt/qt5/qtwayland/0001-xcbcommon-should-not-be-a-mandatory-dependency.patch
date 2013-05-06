@@ -1,4 +1,4 @@
-From c8417a2b0b66c26eaa0569c19422f87598e29629 Mon Sep 17 00:00:00 2001
+From ec5b7705fe0deb18dd38b3ed4df0ec73dc572147 Mon Sep 17 00:00:00 2001
 From: Mikko Levonmaa <mikko.levonmaa@palm.com>
 Date: Tue, 19 Feb 2013 11:16:05 -0800
 Subject: [PATCH 1/4] xcbcommon should not be a mandatory dependency
@@ -6,7 +6,13 @@ Subject: [PATCH 1/4] xcbcommon should not be a mandatory dependency
 Not all platforms that use qtwayland depend on xcbcommon to be present
 for them to be functional
 
-Change-Id: I899d9314bdf772a9d5b8b7c143636f9f12c8ad1d
+This change won't be needed when this commit from dev branch is merged
+to stable:
+commit 894adf8a447865119be7c6c4d01577d8032f4177
+Author: Oswald Buddenhagen <oswald.buddenhagen@digia.com>
+Date:   Mon Apr 8 12:54:58 2013 +0200
+
+make failure to configure wayland non-fatal for a top-level build of qt
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
@@ -14,15 +20,15 @@ Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
  1 file changed, 3 insertions(+), 3 deletions(-)
 
 diff --git a/qtwayland.pro b/qtwayland.pro
-index ee0e5ac..f1a6b6f 100644
+index 3d5a6b0..66dd38a 100644
 --- a/qtwayland.pro
 +++ b/qtwayland.pro
 @@ -11,15 +11,15 @@ qtCompileTest(xcomposite)
  load(qt_parts)
  
  !config_wayland {
--    error(QtWayland requires Wayland 1.0.0 or higher)
-+    error("QtWayland requires Wayland 1.0.0 or higher")
+-    error(QtWayland requires Wayland 1.0.3 or higher)
++    error("QtWayland requires Wayland 1.0.3 or higher")
  }
  
  !config_xkbcommon {
